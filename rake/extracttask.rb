@@ -8,10 +8,16 @@ def mv_r(src, dest, options = {})
         mv_r(s, d, options)
       end
     else
-      FileUtils.mv(src, dest, options)
+      # This should be FileUtils.mv(src, dest, options)
+      # It is the copy remove pair to work around the Spoonium bug
+      FileUtils.cp_r(src, dest, options)
+      FileUtils.rm_r(src, options)
     end
   else
-    FileUtils.mv(src, dest, options)
+      # This should be FileUtils.mv(src, dest, options)
+      # It is the copy remove pair to work around the Spoonium bug
+      FileUtils.cp_r(src, dest, options)
+      FileUtils.rm_r(src, options)
   end
 end
 
